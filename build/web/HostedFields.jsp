@@ -1,14 +1,14 @@
-<%-- 
-    Document   : DropInUI
-    Created on : Aug 20, 2016, 6:54:43 PM
-    Author     : -sergio-
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <script src='//assets.codepen.io/assets/editor/live/console_runner-d0a557e5cb67f9cd9bbb9673355c7e8e.js'></script><script src='//assets.codepen.io/assets/editor/live/events_runner-21174b4c7273cfddc124acb0876792e0.js'></script><script src='//assets.codepen.io/assets/editor/live/css_live_reload_init-7618a0de08795409d8f6c9ef6805f7b2.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="canonical" href="http://codepen.io/braintree/pen/MyzXqG" />
+        <script src='//assets.codepen.io/assets/editor/live/console_runner-d0a557e5cb67f9cd9bbb9673355c7e8e.js'></script>
+        <script src='//assets.codepen.io/assets/editor/live/events_runner-21174b4c7273cfddc124acb0876792e0.js'></script>
+        <script src='//assets.codepen.io/assets/editor/live/css_live_reload_init-7618a0de08795409d8f6c9ef6805f7b2.js'></script>
+        <meta charset='UTF-8'><meta name="robots" content="noindex">
+        <link rel="canonical" href="http://codepen.io/braintree/pen/MyzXqG" />
 
         <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
         <style class="cp-pen-styles">/* Uses Bootstrap stylesheets for styling, see linked CSS*/
@@ -38,6 +38,14 @@
                 display: block;
             }
 
+            
+
+            input:required:valid {
+
+                border: 1px solid green;
+                
+
+            }
             /* Braintree Hosted Fields styling classes*/
             .braintree-hosted-fields-focused { 
                 border: 1px solid #0275d8;
@@ -91,6 +99,18 @@
             </div>
             <form class="panel-body">
                 <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label">First Name</label>
+                        <!--  Hosted Fields div container -->
+                        <input class="form-control" id="first-name" name="firstname" placeholder="Name" required />
+                        <span class="helper-text"></span>
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <label class="control-label">Last Name</label>
+                        <!--  Hosted Fields div container -->
+                        <input class="form-control" id="last-name" name="lastname" placeholder="Last Name" required />
+                        <span class="helper-text"></span>
+                    </div>
                     <div class="form-group col-xs-8">
                         <label class="control-label">Card Number</label>
                         <!--  Hosted Fields div container -->
@@ -125,7 +145,7 @@
                 </div>
 
 
-                <button value="submit" id="submit" class="btn btn-success btn-lg center-block">Pay with <span id="card-type">Card</span></button>
+                <button value="submit" id="submit" class="btn btn-success btn-lg center-block"><span id="card-type">Card</span></button>
             </form>
 
             <!-- Load the required client component. -->
@@ -134,7 +154,9 @@
             <!-- Load Hosted Fields component. -->
             <script src="https://js.braintreegateway.com/web/3.0.0/js/hosted-fields.min.js"></script>
             <script src='//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script><script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
-            <script>braintree.client.create({authorization: '<%=(String) session.getAttribute("clientToken")%>'}, function (err, clientInstance) {
+            <script>
+
+                braintree.client.create({authorization: '<%=(String) session.getAttribute("clientToken")%>'}, function (err, clientInstance) {
                     if (err) {
                         console.error(err);
                         return;
@@ -202,12 +224,13 @@
                         });
                         hostedFieldsInstance.on('cardTypeChange', function (event) {
                             if (event.cards.length === 1) {
-                                $('#card-type').text(event.cards[0].niceType);
+                                $('#card-type').text("Thanks for using " + event.cards[0].niceType + "!");
                             } else {
                                 $('#card-type').text('Card');
                             }
                         });
                         $('.panel-body').submit(function (event) {
+                            
                             event.preventDefault();
                             hostedFieldsInstance.tokenize(function (err, payload) {
                                 if (err) {
@@ -215,15 +238,24 @@
                                     return;
                                 }
                                 var nonce = payload.nonce;
-                                
+
                                 //window.alert(nonce);
-                                
-                                document.getElementById("nonce").value = nonce;
-                                document.getElementById("submitForm").submit();
+                                if(check()){
+                                    document.getElementById("nonce").value = nonce;
+                                    document.getElementById("submitForm").submit();
+                                }
                             });
                         });
                     });
                 });
+                
+                function check()
+                {
+                    if (document.getElementById("first-name").value < 2 || document.getElementById("last-name").value < 2){
+                        return false;
+                    }
+                    return true;
+                }
                 //# sourceURL=pen.js
             </script>
     </body>
