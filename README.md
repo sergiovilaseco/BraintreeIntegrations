@@ -1,2 +1,2 @@
 # BraintreeIntegrations
-Project developed in NetBeans
+Project developed using NetBeans IDE
