@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>DropIn UI</title>
+        <title>Adding a Payment Method</title>
     </head>
     <body>
         <a href="index.jsp">Back to index </a>
@@ -20,16 +20,20 @@
             <input type="text" name="fname" value="Sergio" readonly/><br>
             <label for='price'>Last Name:</label><br>
             <input type="text" name="lname" value="Vilaseco-Romero" readonly/><br>
+            <label for='price'>Phone:</label><br>
+            <input type="text" name="phone" value="0857459352" readonly/><br>
+            <label for='price'>Email:</label><br>
+            <input type="text" name="email" value="sergio.vilaseco@outlook.com" readonly/><br>
             <label for='price'>Address:</label><br>
             <input type="text" name="address" value="24 my street" readonly/><br>
             <label for='price'>County:</label><br>
             <input type="text" name="county" value="Louth" readonly/><br>
             <label for='price'>Country</label><br>
-            <input type="text" name="county" value="Ireland" readonly/><br>
+            <input type="text" name="country" value="Ireland" readonly/><br>
             <label for='price'>Price:</label><br>
             <input id="price" type="text" name="price" value="100.00" /><br>
             <input type='hidden' id="nonce" name='nonce' value=''/>
-            <input type="hidden" name="action" value="dropinui" />
+            <input type="hidden" name="action" value="addpaymentmethod" />
             <br><br>
 
         </form>
@@ -50,7 +54,7 @@
                     // When you're ready to submit the form:
                     //myForm.submit();
                     var nonce = obj.nonce;
-                    window.alert(nonce);
+
                     document.getElementById("nonce").value = nonce;
                     document.getElementById("submitForm").submit();
                 }

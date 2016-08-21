@@ -50,7 +50,7 @@
                     // When you're ready to submit the form:
                     //myForm.submit();
                     var nonce = obj.nonce;
-
+                    window.alert(nonce);
                     document.getElementById("nonce").value = nonce;
                     document.getElementById("submitForm").submit();
                 }

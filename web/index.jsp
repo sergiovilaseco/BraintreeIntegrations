@@ -25,5 +25,7 @@ and open the template in the editor.
         <a href='processRequest?action=newclienttoken&forwardToJsp=PPAuthorization.jsp'>PayPal authorization / submit for settlement / void</a>
         <br><br>
         <a href='processRequest?action=newclienttoken&forwardToJsp=processRequest?action=updateppauthorization'>List of PP Transactions</a>
+        <br><br>
+        <a href='processRequest?action=newclienttoken&forwardToJsp=PaymentMethod.jsp'>Setting PaymentMethod / re-billing</a>
     </body>
 </html>

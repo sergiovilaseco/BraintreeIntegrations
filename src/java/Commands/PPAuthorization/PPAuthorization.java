@@ -61,8 +61,7 @@ public class PPAuthorization implements Command {
             if (TResult.isSuccess()) {
                 forwardToJsp = "PPAuthorizationStatus.jsp";
 
-                TransactionSearchRequest TSRequest = new TransactionSearchRequest().paymentInstrumentType().in("paypal_account").status().in(Transaction.Status.AUTHORIZED,
-                Transaction.Status.SUBMITTED_FOR_SETTLEMENT, Transaction.Status.VOIDED,Transaction.Status.SETTLING);
+                TransactionSearchRequest TSRequest = new TransactionSearchRequest().paymentInstrumentType().in("paypal_account");
 
                 ResourceCollection<Transaction> collection = gateway.transaction().search(TSRequest);
 

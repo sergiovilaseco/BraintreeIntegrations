@@ -1,6 +1,7 @@
 package Factory;
 
 
+import Commands.AddPaymentMethod.AddPaymentMethod;
 import Commands.CCAuthorization.CCAuthorization;
 import Commands.CCAuthorization.UpdateCCAuthorization;
 import Commands.ClientToken.newClientToken;
@@ -50,6 +51,10 @@ public class CommandFactory {
             // UpdatePPAuthorization
             case "updateppauthorization":
                 command = new UpdatePPAuthorization();
+                break;
+            // Adding payment method
+            case "addpaymentmethod":
+                command = new AddPaymentMethod();
                 break;
             // Errors
             default:

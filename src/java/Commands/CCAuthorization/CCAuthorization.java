@@ -76,8 +76,7 @@ public class CCAuthorization implements Command {
             if (TResult.isSuccess()) {
                 forwardToJsp = "CCAuthorizationStatus.jsp";
 
-                TransactionSearchRequest TSRequest = new TransactionSearchRequest().paymentInstrumentType().in("credit_card").status().in(Transaction.Status.AUTHORIZED,
-                Transaction.Status.SUBMITTED_FOR_SETTLEMENT, Transaction.Status.VOIDED, Transaction.Status.SETTLING);
+                TransactionSearchRequest TSRequest = new TransactionSearchRequest().paymentInstrumentType().in("credit_card");
 
                 ResourceCollection<Transaction> collection = gateway.transaction().search(TSRequest);
 
