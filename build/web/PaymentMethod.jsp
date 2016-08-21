@@ -10,10 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Adding a Payment Method</title>
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     </head>
     <body>
         <a href="index.jsp">Back to index </a>
-        <form  action="processRequest" id="submitForm" method="post"><br>
+        <div class="panel panel-default bootstrap-basic center-block" style="width: 60%; margin-left: 20%">
+            <form  action="processRequest" id="submitForm" method="post" style="margin-left: 30px"><br>
             <label for='price'>Item:</label><br>
             <input type="text" name="item" value="Buying a new phone" readonly/><br>
             <label for='price'>Name:</label><br>
@@ -38,11 +40,15 @@
 
         </form>
 
-        <form>
-            <div id="dropin"></div>
-            <input type='submit' value='Pay'/>
-
-        </form>
+        </div>
+        <div class="panel panel-default bootstrap-basic center-block" style="width: 60%; margin-left: 20%">
+            <form class="center-block panel-body" id="dropin-form">
+                <div id="dropin" style="margin-left: 30px;margin-top: 30px"></div>
+            </form>
+            <div class="panel-footer" style="text-align: right">
+                <input type='submit' value='Pay' class="btn btn-primary" form="dropin-form" style="width: 90px"/>
+            </div>
+        </div>
         <script src="https://js.braintreegateway.com/js/braintree-2.21.0.min.js"></script>
         <script>
             var token = '<%=(String) session.getAttribute("clientToken")%>';

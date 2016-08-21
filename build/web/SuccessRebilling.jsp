@@ -18,60 +18,57 @@
         <title>Transaction success</title>
         <%
             Result<Transaction> TResult = (Result<Transaction>) session.getAttribute("TResult");
-        %>
+        %><link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     </head>
     <body>
         <a href="index.jsp">Back to index </a>
-        <table style="width: 50%; margin-left: 25%">
-            <tr>
-                <td style="width: 20%; text-align: center">
-                    <p>
-                        <font color='black' >Transaction ID </font>
-                    </p>
-                </td>
-                <td style="width: 40%; text-align: center">
-                    <p>
-                        <font color='black'>Status </font>
-                    </p>
-                </td>
-                <td style="width: 40%; text-align: center">
-                    <p>
-                        <font color='black'>Submit for settlement </font>
-                    </p>
-                </td>
-                <td style="width: 40%; text-align: center">
-                    <p>
-                        <font color='black'>Void</font>
-                    </p>
-                </td>
-            </tr>
+        <div class="panel panel-default bootstrap-basic center-block" style="width: 60%; margin-left: 20%">
+            <table style="text-align: center">            
+                <tr>
+                    <td style="width: 20%; text-align: center">
+                        <p>
+                            <font color='black' >Transaction ID </font>
+                        </p>
+                    </td>
+                    <td style="width: 40%; text-align: center">
+                        <p>
+                            <font color='black'>Status </font>
+                        </p>
+                    </td>
+                    <td style="width: 60%;">
+                        <p>
+                            <font color='black'>Submit for settlement </font>
+                        </p>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                    <td style="width: 20%; text-align: center">
+                        <p>
 
-            <tr>
-                <td style="width: 20%; text-align: center">
-                    <p>
+                            <font color='black' ><%=TResult.getTarget().getId()%></font>
+                        </p>
+                    </td>
+                    <td style="width: 40%; text-align: center">
+                        <p>
+                            <font color='black'><%=TResult.getTarget().getStatus()%></font>
+                        </p>
+                    </td>
+                    <td style="width: 60%;">
 
-                        <font color='black' ><%=TResult.getTarget().getId()%></font>
-                    </p>
-                </td>
-                <td style="width: 40%; text-align: center">
-                    <p>
-                        <font color='black'><%=TResult.getTarget().getStatus()%></font>
-                    </p>
-                </td>
-                <td style="width: 40%; text-align: center">
+                        <form  action="processRequest" id="submitForm" method="post" style="margin-left: 30px ">
+                            <input type='hidden' name='transactionid' value='<%=TResult.getTarget().getId()%>'/>
+                            <input type='hidden' name='submitForSettle' value='true'/>
+                            <input type="hidden" name="action" value="addpaymentmethod" />
+                            <input type="text" name="price" placeholder="<%=TResult.getTarget().getAmount()%>" />
+                            <input type="submit" name="submitButton" value="Bill this amount" />
 
-                    <form  action="processRequest" id="submitForm" method="post" style="margin-left: 30px ">
-                        <input type='hidden' name='transactionid' value='<%=TResult.getTarget().getId()%>'/>
-                        <input type='hidden' name='submitForSettle' value='true'/>
-                        <input type="hidden" name="action" value="addpaymentmethod" />
-                        <input type="text" name="price" value="<%=TResult.getTarget().getAmount()%>" />
-                        <input type="submit" name="submitButton" value="Bill this amount" />
+                        </form>
+                    </td>
 
-                    </form>
-
-                </td>
-
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
